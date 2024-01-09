@@ -79,7 +79,7 @@ define elasticsearch::service::systemd (
     $service_enable = false
   }
 
-  if(has_key($init_defaults, 'ES_USER') and $init_defaults['ES_USER'] != $elasticsearch::elasticsearch_user) {
+  if(('ES_USER' in $init_defaults) and $init_defaults['ES_USER'] != $elasticsearch::elasticsearch_user) {
     fail('Found ES_USER setting for init_defaults but is not same as elasticsearch_user setting. Please use elasticsearch_user setting.')
   }
 
@@ -142,19 +142,19 @@ define elasticsearch::service::systemd (
   # init file from template
   if ($init_template != undef) {
     # Check for values in init defaults we may want to set in the init template
-    if (has_key($new_init_defaults, 'MAX_OPEN_FILES')) {
+    if ('MAX_OPEN_FILES' in $new_init_defaults) {
       $nofile = $new_init_defaults['MAX_OPEN_FILES']
     } else {
       $nofile = '65536'
     }
 
-    if (has_key($new_init_defaults, 'MAX_LOCKED_MEMORY')) {
+    if ('MAX_LOCKED_MEMORY' in $new_init_defaults) {
       $memlock = $new_init_defaults['MAX_LOCKED_MEMORY']
     } else {
       $memlock = undef
     }
 
-    if (has_key($new_init_defaults, 'MAX_THREADS')) {
+    if ('MAX_THREADS' in $new_init_defaults) {
       $nproc = $new_init_defaults['MAX_THREADS']
     } else {
       $nproc = '4096'

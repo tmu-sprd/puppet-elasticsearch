@@ -199,7 +199,7 @@ define elasticsearch::instance (
       $instance_config = deep_implode($config)
     }
 
-    if(has_key($instance_config, 'node.name')) {
+    if('node.name' in $instance_config) {
       $instance_node_name = {}
     } else {
       $instance_node_name = { 'node.name' => "${::hostname}-${name}" }

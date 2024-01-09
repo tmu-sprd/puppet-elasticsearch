@@ -81,7 +81,7 @@ define elasticsearch::service::openrc (
 
   }
 
-  if(has_key($init_defaults, 'ES_USER') and $init_defaults['ES_USER'] != $elasticsearch::elasticsearch_user) {
+  if(('ES_USER' in $init_defaults) and $init_defaults['ES_USER'] != $elasticsearch::elasticsearch_user) {
     fail('Found ES_USER setting for init_defaults but is not same as elasticsearch_user setting. Please use elasticsearch_user setting.')
   }
 
