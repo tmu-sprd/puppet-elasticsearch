@@ -202,7 +202,7 @@ define elasticsearch::instance (
     if('node.name' in $instance_config) {
       $instance_node_name = {}
     } else {
-      $instance_node_name = { 'node.name' => "${::hostname}-${name}" }
+      $instance_node_name = { 'node.name' => "${facts['networking']['hostname']}-${name}" }
     }
 
     # String or array for data dir(s)
